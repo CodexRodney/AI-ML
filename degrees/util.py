@@ -1,10 +1,11 @@
 class Node():
-    __slots__ = ['state', 'movie_id', 'neighbors']
+    __slots__ = ['state', 'movie_id', 'neighbors', 'parent']
 
-    def __init__(self, state, movie_id, neighbors):
+    def __init__(self, state, movie_id, neighbors, parent):
         self.state = state
         self.movie_id = movie_id
         self.neighbors = neighbors
+        self.parent = parent
 
 
 class StackFrontier():
@@ -33,7 +34,6 @@ class StackFrontier():
 
 
 class QueueFrontier(StackFrontier):
-
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
