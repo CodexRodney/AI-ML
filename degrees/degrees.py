@@ -101,7 +101,7 @@ def shortest_path(source, target):
 
 
     # Initialize frontier to be have the start as the source id
-    start = Node(state=source, movie_id="Rodney", neighbors=neighbors_for_person(source), parent=None)
+    start = Node(state=source, movie_id=None, neighbors=neighbors_for_person(source), parent=None)
 
     #Frontier where to start the searching implemented as a queue
     frontier = QueueFrontier()
@@ -119,10 +119,6 @@ def shortest_path(source, target):
         # choose a node from the frontier
         node = frontier.remove()
 
-        # #check if the node is the solution
-        # if node.state == target:
-        #     pass
-
         # marking person as explored
         explored.add(node.state)
 
@@ -136,7 +132,6 @@ def shortest_path(source, target):
                 # target is found
                 path.append(character)
                 while node.parent is not None:
-                    # print(node.state)
                     path.append((node.movie_id, node.state))
                     node = node.parent
                 print("This is the path", path)
@@ -149,8 +144,9 @@ def shortest_path(source, target):
             if (character[1] in explored) or (frontier.contains_state(character[1])):
                 continue
 
-            new_node = Node(state=character[1], movie_id=character[0], neighbors=neighbors_for_person(character[1]),
-                        parent=node)
+            new_node = Node(state=character[1], movie_id=character[0],
+                            neighbors=neighbors_for_person(character[1]), parent=node)
+            
             frontier.add(new_node)
 
 def person_id_for_name(name):
@@ -189,7 +185,6 @@ def neighbors_for_person(person_id):
     for movie_id in movie_ids:
         for person_id in movies[movie_id]["stars"]:
             neighbors.add((movie_id, person_id))
-    # print("Calling from neighbors", neighbors)
     return neighbors
 
 
