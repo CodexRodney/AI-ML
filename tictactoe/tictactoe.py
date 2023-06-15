@@ -21,21 +21,47 @@ def player(board):
     """
     Returns player who has the next turn on a board.
     """
-    raise NotImplementedError
-
+    # checks if game is still on
+    if terminal(board) == True:
+        return "Game is Over"
+      
+    if (len(actions(board)) % 2) == 0:
+        return O
+    return X
 
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-    raise NotImplementedError
-
+    # checks if the game is still on
+    if terminal(board):
+        return "Game is over"
+    
+    possible_actions = set()
+    start = 0
+    for x in board:
+        index = 0
+        for w in x:
+            if EMPTY == w:
+                possible_actions.add((start, index))
+            index += 1
+        start += 1
+    return possible_actions
 
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+    possible_actions = actions(board)
+    if isinstance(possible_actions, set):
+        if action in possible_actions:
+            # deep copy of original board
+            new_board = board[0:]
+            # inserts the next player in the action set
+            new_board[action[0]][action[1]] = player(board)
+            return new_board
+        else:
+            raise ValueError("Inappropriate Move")
 
 
 def winner(board):
@@ -67,7 +93,12 @@ def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    if winner(board) == X:
+        return 1
+    elif winner(board) == O:
+        return -1
+    else:
+        return 0
 
 def minimax(board):
     """
