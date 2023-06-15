@@ -42,8 +42,15 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
-
+    # check if O has won the game
+    if (horizontal_winning(board, O) or vertical_winning(board, O)
+            or diagonal_win(board, O)):
+        return O
+    # check if X has won the game
+    if (horizontal_winning(board, X) or vertical_winning(board, X)
+            or diagonal_win(board, X)):
+        return X
+    return None
 
 def terminal(board):
     """
@@ -52,16 +59,10 @@ def terminal(board):
     # checks if the board has places that are not filled
     if not any(EMPTY in x for x in board):
         return True
-    # checks for diagonal winning
-    if diagonal_win(board, X) or diagonal_win(board, O):
-        return True
-    #checks for horizontal winning
-    if horizontal_winning(board, X) or horizontal_winning(board, O):
-        return True
-    #checks for vertical winning
-    if vertical_winning(board, X) or horizontal_winning(board, O):
+    if winner(board) is not None:
         return True
     return False
+
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
