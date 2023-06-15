@@ -50,7 +50,11 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    raise NotImplementedError
+    # checks if the board has places that are not filled
+    if not any(EMPTY in x for x in board):
+        return True
+    
+
 
 
 def utility(board):
