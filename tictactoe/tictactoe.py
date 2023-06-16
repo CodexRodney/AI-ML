@@ -104,6 +104,8 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+    if terminal(board):
+        return None 
     raise NotImplementedError
 
 def diagonal_win(board, character):
@@ -119,6 +121,16 @@ def diagonal_win(board, character):
             count += 1
     if count == 3:
         return True
+    # checking for the other diagonal
+    count = 0
+    diagonal_indices= [(0,2), (1,1), (2,0)]
+    diagonal_board = [board[x[0]][x[1]] for x in diagonal_indices]
+    for x in diagonal_board:
+        if character == x:
+            count += 1
+    if count == 3:
+        return True
+
     return False
 
 def horizontal_winning(board, character):
@@ -147,3 +159,5 @@ def vertical_winning(board, character):
         if count == 3:
             return True
     return False
+
+# def max 
