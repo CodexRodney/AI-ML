@@ -116,29 +116,12 @@ def minimax(board):
         move = max_player(board)[0]
         print("The move is ", move)
         return move
-    # new_board = copy.deepcopy(board)
-    # value = -math.inf
-    # best_action = None
-    # for action in actions(new_board):
-    #     # ai to play move
-    #     new_board = result(new_board, action)
-    #     oponent_new_board = copy.deepcopy(new_board)
-    #     # taking account of the ai's move
-    #     for oponent_action in actions(oponent_new_board):
-    #         # taking into consideration oponent's move
-    #         print("The possible actions are: ", actions(oponent_new_board))
-    #         oponent_new_board = result(oponent_new_board, oponent_action)
-    #         utilize = utility(oponent_new_board)
-    #         if value < utilize:
-    #             # print("The Action: ", oponent_action)
-    #             # print("The value is : ", value)
-    #             best_action = oponent_action
-    #             value = utilize
-    #         oponent_new_board = new_board
-    #     new_board = board
-    # return best_action
     
 def max_player(board):
+    """
+    Returns the move with the highest utility
+    """
+
     # checks if the game is at the end
     if terminal(board):
         return utility(board)
@@ -162,6 +145,9 @@ def max_player(board):
         
 
 def min_player(board):
+    """
+    Returns the move with the least utility
+    """
     if terminal(board):
         return utility(board)
     
@@ -234,4 +220,3 @@ def vertical_winning(board, character):
         if count == 3:
             return True
     return False
-
