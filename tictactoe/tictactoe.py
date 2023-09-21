@@ -107,14 +107,11 @@ def minimax(board):
     #Assuming the role of a minimal player without playing optimally
     if terminal(board):
         return None
-    print("The next player is ", player(board))
     if player(board) == O:
         move = min_player(board)[0]
-        print("The move is ", move)
         return move
     elif player(board) == X:
         move = max_player(board)[0]
-        print("The move is ", move)
         return move
     
 def max_player(board):
@@ -126,14 +123,10 @@ def max_player(board):
     if terminal(board):
         return utility(board)
     
-    print("The board in max_player:")
-    print(board)
     v = -math.inf # will hold the utility with the highest value
     best_action = None # plays the best move to be
     for action in actions(board):
-        print("Considering another move in the max player")
         current_utility = min_player(result(board, action))
-        print(f"In the max player the utility is {current_utility}")
         if isinstance(current_utility, tuple):
             if current_utility[1] > v:
                 v = current_utility[1]
@@ -151,8 +144,6 @@ def min_player(board):
     if terminal(board):
         return utility(board)
     
-    print("The board in min_player:")
-    print(board)
     v = math.inf
     best_action = None
     for action in actions(board):
@@ -197,8 +188,6 @@ def horizontal_winning(board, character):
     Returns True if character occupies any of 
     all the horizontal positions of board
     """
-    # print("The board being checked is\n", board)
-    # print("The Character being checked is ", character)
     for x in board:
         count = 0
         for w in x:
