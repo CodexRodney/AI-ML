@@ -4,3 +4,4 @@ degrees/small
 __pycache__
 *.png
 .tictactoe
+.venv*
